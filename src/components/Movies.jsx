@@ -89,7 +89,7 @@ const Movies = ({ currentTab, page, setPage, sortBy }) => {
           <img src={Loading} alt='' />
           <p>Loading</p>
         </div>
-        {movies?.length > 0 && <div ref={loader}></div>}
+        <div ref={loader}></div>
       </div>
     </>
   )

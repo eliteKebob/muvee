@@ -24,6 +24,20 @@
   margin-left: 1vw;
 }
 
+.wrapper select {
+  position: absolute;
+  right: 0;
+  margin-right: 5vw;
+  border: 1px solid #037ef3;
+  border-radius: 10px;
+  padding: 0 4px;
+  color: #037ef3;
+  outline: none;
+  background: white;
+  cursor: pointer;
+  font-size: 3vh;
+}
+
 .defaultTab {
   cursor: pointer;
 }

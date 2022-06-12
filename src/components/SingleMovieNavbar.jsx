@@ -6,7 +6,7 @@ const SingleMovieNavbar = ({ movie }) => {
   return (
     <div className={styles.navbar}>
       <p className={styles.nbSymbol}>&#60;</p>
-      <p> Back to List</p>
+      <p onClick={() => navigate('/')}> Back to List</p>
       <div className={styles.nbLinks}>
         <p onClick={() => navigate('/')}>Home </p>
         <p className={styles.nbSymbol}>&#62; </p>

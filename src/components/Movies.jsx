@@ -1,31 +1,62 @@
 import styles from '../styles/Landing.module.css'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import SingleMovieCard from './SingleMovieCard'
 import Loading from '../assets/loading.gif'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { fetchTrendMovies } from '../features/movie/movieSlice'
+import { useDispatch } from 'react-redux'
+import { setPrevPos } from '../features/movie/movieSlice'
 
-const Movies = ({ currentTab, page, setPage }) => {
+const Movies = ({ currentTab, page, setPage, sortBy }) => {
   const [currMovies, setCurrMovies] = useState([])
 
   const loader = useRef(null)
-
   const dispatch = useDispatch()
 
-  const movies = useSelector((state) => state.movie.trendMovies)
+  const movies = useSelector((state) => state.movie.trendMoviesList)
+  const lastPosition = useSelector((state) => state.movie.prevPosition)
+
+  const scrollToLastPosition = () => {
+    if (currentTab === 0) {
+      if (lastPosition !== 0) {
+        window.scrollTo({
+          top: lastPosition,
+          behavior: 'smooth',
+        })
+      }
+    }
+  }
 
   useEffect(() => {
-    // setCurrMovies([])
-    for (let i = 0; i < movies.length; i++) {
-      setCurrMovies(currMovies.concat(movies[i].results))
+    if (sortBy === 'smart') {
+      setCurrMovies([...movies])
+      setTimeout(scrollToLastPosition, 100)
+    } else {
+      let newArr = [...movies]
+      newArr.sort((a, b) => b.popularity - a.popularity)
+      setCurrMovies([...newArr])
+      setTimeout(scrollToLastPosition, 100)
     }
     // eslint-disable-next-line
   }, [movies])
 
+  useEffect(() => {
+    if (sortBy === 'descending') {
+      let newArr = [...currMovies]
+      newArr.sort((a, b) => b.popularity - a.popularity)
+      setCurrMovies([...newArr])
+    } else {
+      setCurrMovies(movies)
+    }
+    // eslint-disable-next-line
+  }, [sortBy])
+
   const handleObserver = useCallback((entries) => {
     const target = entries[0]
+
     if (target.isIntersecting) {
       setPage((prev) => prev + 1)
+      let pos = window.pageYOffset
+      dispatch(setPrevPos(pos))
     }
     // eslint-disable-next-line
   }, [])
@@ -33,7 +64,7 @@ const Movies = ({ currentTab, page, setPage }) => {
   useEffect(() => {
     const option = {
       root: null,
-      rootMargin: '0px',
+      rootMargin: '20px',
       threshold: 1.0,
     }
     const observer = new IntersectionObserver(handleObserver, option)
@@ -44,15 +75,12 @@ const Movies = ({ currentTab, page, setPage }) => {
     <>
       <div
         className={
-          currentTab === 'allMovies'
-            ? styles.listWrapper
-            : styles.disabledWrapper
+          currentTab === 0 ? styles.listWrapper : styles.disabledWrapper
         }
       >
         {currMovies?.map((movie, idx) => (
           <SingleMovieCard key={idx} movie={movie} />
         ))}
-
         <div className={styles.loadingSection}>
           <img src={Loading} alt='' />
           <p>Loading</p>

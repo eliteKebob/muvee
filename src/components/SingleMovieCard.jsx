@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import {
   addToWatchList,
   removeFromWatchList,
+  setPrevPos,
 } from '../features/movie/movieSlice'
 
 const SingleMovieCard = ({ movie }) => {
@@ -32,6 +33,12 @@ const SingleMovieCard = ({ movie }) => {
     }
   }
 
+  const handleNavigate = () => {
+    let pos = window.pageYOffset
+    dispatch(setPrevPos(pos))
+    navigate(`/movie/${movie?.id}`)
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
@@ -39,7 +46,7 @@ const SingleMovieCard = ({ movie }) => {
           <img
             src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
             alt='poster'
-            onClick={() => navigate(`/movie/${movie?.id}`)}
+            onClick={handleNavigate}
           />
           <p className={styles.headRating}>{movie?.vote_average}</p>
           <p className={styles.headDate}>
@@ -48,10 +55,7 @@ const SingleMovieCard = ({ movie }) => {
         </div>
         <div className={styles.body}>
           <div className={styles.bodyText}>
-            <p
-              className={styles.btTitle}
-              onClick={() => navigate(`/movie/${movie?.id}`)}
-            >
+            <p className={styles.btTitle} onClick={handleNavigate}>
               {movie?.original_title}
             </p>
             <div className={styles.itemGenres}>

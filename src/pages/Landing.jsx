@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { fetchTrendMovies } from '../features/movie/movieSlice'
 import styles from '../styles/Landing.module.css'
@@ -8,9 +8,9 @@ import WatchList from '../components/WatchList'
 
 const Landing = () => {
   const [page, setPage] = useState(1)
-  const [currentTab, setCurrentTab] = useState('allMovies')
+  const [currentTab, setCurrentTab] = useState(0)
+  const [sortBy, setSortBy] = useState('smart')
 
-  const movies = useSelector((state) => state.movie.trendMovies)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -20,13 +20,21 @@ const Landing = () => {
 
   return (
     <div className={styles.wrapper}>
-      <HomepageNavbar currentTab={currentTab} setCurrentTab={setCurrentTab} />
-      {currentTab === 'allMovies' ? (
-        <Movies currentTab={currentTab} page={page} setPage={setPage} />
-      ) : (
-        ''
+      <HomepageNavbar
+        currentTab={currentTab}
+        setCurrentTab={setCurrentTab}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+      />
+      {currentTab === 0 && (
+        <Movies
+          currentTab={currentTab}
+          page={page}
+          setPage={setPage}
+          sortBy={sortBy}
+        />
       )}
-      {currentTab === 'watchList' ? <WatchList currentTab={currentTab} /> : ''}
+      {currentTab === 1 && <WatchList currentTab={currentTab} />}
     </div>
   )
 }

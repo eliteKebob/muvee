@@ -4,6 +4,7 @@ import axios from 'axios'
 const initialState = {
   searchResults: [],
   trendMovies: [],
+  trendMoviesList: [],
   watchList: [],
   singleMovie: {},
   genres: null,
@@ -63,6 +64,9 @@ export const movieSlice = createSlice({
     removeFromWatchList: (state, action) => {
       state.watchList.splice(action.payload, 1)
     },
+    setPrevPos: (state, action) => {
+      state.prevPosition = action.payload
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(searchMovies.pending, (state, action) => {
@@ -110,12 +114,16 @@ export const movieSlice = createSlice({
         if (state.trendMovies.length + 1 === action.payload.page) {
           state.trendMovies = [...state.trendMovies, action.payload]
           state.loading = false
+          let newArr = state.trendMoviesList.concat(action.payload.results)
+          state.trendMoviesList = [...newArr]
         } else {
           return
         }
       } else {
         state.trendMovies = [...state.trendMovies, action.payload]
         state.loading = false
+        let newArr = state.trendMoviesList.concat(action.payload.results)
+        state.trendMoviesList = [...newArr]
       }
     })
     builder.addCase(fetchTrendMovies.rejected, (state, action) => {
@@ -126,4 +134,5 @@ export const movieSlice = createSlice({
 })
 
 export default movieSlice.reducer
-export const { addToWatchList, removeFromWatchList } = movieSlice.actions
+export const { addToWatchList, removeFromWatchList, setPrevPos } =
+  movieSlice.actions

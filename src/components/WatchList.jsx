@@ -7,7 +7,7 @@ const WatchList = ({ currentTab }) => {
   const movies = useSelector((state) => state.movie.watchList)
 
   useEffect(() => {
-    if (currentTab === 'watchList') {
+    if (currentTab === 1) {
       window.scrollTo({
         top: 0,
         left: 0,
@@ -18,9 +18,7 @@ const WatchList = ({ currentTab }) => {
 
   return (
     <div
-      className={
-        currentTab === 'watchList' ? styles.listWrapper : styles.disabledWrapper
-      }
+      className={currentTab === 1 ? styles.listWrapper : styles.disabledWrapper}
     >
       {movies?.length > 0
         ? movies?.map((movie, idx) => (

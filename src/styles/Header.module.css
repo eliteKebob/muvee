@@ -1,0 +1,126 @@
+.wrapper {
+  width: 100vw;
+  height: 15vh;
+  position: fixed;
+  top: 0;
+  background-color: #f3f4f7;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid #caccd1;
+  color: #037ef3;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 2px 2px rgb(0 0 0 / 6%),
+    0 0 2px rgb(0 0 0 / 7%);
+  text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.wrapper h1 {
+  cursor: pointer;
+  margin: 0 13vw;
+  font-size: 5vh;
+  text-align: center;
+  text-shadow: none;
+}
+
+.searchBar button,
+input {
+  padding: 1vh 1vw;
+  outline: none;
+  border: none;
+  background: #037ef3;
+  color: white;
+  border-radius: 10px;
+  font-size: 3vh;
+}
+
+.searchBar button {
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 2px 2px rgb(0 0 0 / 6%),
+    0 0 2px rgb(0 0 0 / 7%);
+}
+
+.searchBar button:hover {
+  background-color: #0273dd;
+}
+
+.searchBar input {
+  width: 31vw;
+  margin-right: 1vw;
+  background: transparent;
+  color: black;
+  border: 1px solid #caccd1;
+}
+
+.searchBar input:focus {
+  border: 1px solid #037ef3;
+  background-color: white;
+}
+
+.srWrapper {
+  position: fixed;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 2px 2px rgb(0 0 0 / 6%),
+    0 0 2px rgb(0 0 0 / 7%);
+  border: 1px solid white;
+  top: 11vh;
+  left: 32vw;
+  width: 31.25vw;
+  z-index: 9999;
+}
+
+.srContent {
+  width: 31.25vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.itemWrapper {
+  min-width: 31.25vw;
+  border-bottom: 1px solid #f3f4f7;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.itemWrapper:hover {
+  background-color: #f3f4f7;
+}
+
+.itemWrapper img {
+  max-height: 5vw;
+  width: 3vw;
+  margin: 0.5vh 0.5vw;
+}
+
+.itemInfo {
+  text-align: left;
+  font-size: 2.75vh;
+}
+
+.itemInfo p {
+  margin-left: 0.15vw;
+}
+
+.itemGenres {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 2vh;
+  margin-top: 0.5vh;
+}
+
+.itemDate {
+  position: absolute;
+  right: 0;
+  margin-right: 0.5vw;
+  font-size: 2vh;
+  font-weight: 700;
+}

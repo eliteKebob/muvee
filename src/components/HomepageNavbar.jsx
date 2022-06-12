@@ -1,6 +1,16 @@
 import styles from '../styles/HomepageNavbar.module.css'
+import { useDispatch } from 'react-redux'
+import { setPrevPos } from '../features/movie/movieSlice'
 
 const HomepageNavbar = ({ currentTab, setCurrentTab, sortBy, setSortBy }) => {
+  const dispatch = useDispatch()
+
+  const handleTab = () => {
+    let pos = window.pageYOffset
+    dispatch(setPrevPos(pos))
+    setCurrentTab(1)
+  }
+
   return (
     <div className={styles.wrapper}>
       <p
@@ -11,7 +21,7 @@ const HomepageNavbar = ({ currentTab, setCurrentTab, sortBy, setSortBy }) => {
       </p>
       <p
         className={currentTab === 1 ? styles.activeTab : styles.defaultTab}
-        onClick={() => setCurrentTab(1)}
+        onClick={handleTab}
       >
         +Watch List
       </p>

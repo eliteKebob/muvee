@@ -1,4 +1,4 @@
-import styles from '../styles/Header.module.css'
+import styles from '../../styles/Header.module.css'
 import { useSelector } from 'react-redux'
 import SingleResultItem from './SingleResultItem'
 

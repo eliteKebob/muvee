@@ -2,8 +2,8 @@ import styles from '../styles/SingleMovie.module.css'
 import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import SingleMovieListItem from '../components/SingleMovieListItem'
-import SingleMovieNavbar from '../components/SingleMovieNavbar'
+import SingleMovieListItem from '../components/Movie/SingleMovieListItem'
+import SingleMovieNavbar from '../components/MoviePage/SingleMovieNavbar'
 import {
   fetchSingleMovie,
   addToWatchList,

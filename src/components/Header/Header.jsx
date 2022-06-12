@@ -1,8 +1,8 @@
-import styles from '../styles/Header.module.css'
+import styles from '../../styles/Header.module.css'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { searchMovies, fetchGenres } from '../features/movie/movieSlice'
+import { searchMovies, fetchGenres } from '../../features/movie/movieSlice'
 import SearchResults from './SearchResults'
 
 const Header = () => {

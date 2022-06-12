@@ -2,9 +2,9 @@ import { useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { fetchTrendMovies } from '../features/movie/movieSlice'
 import styles from '../styles/Landing.module.css'
-import HomepageNavbar from '../components/HomepageNavbar'
-import Movies from '../components/Movies'
-import WatchList from '../components/WatchList'
+import HomepageNavbar from '../components/Home/HomepageNavbar'
+import Movies from '../components/Home/Movies'
+import WatchList from '../components/Home/WatchList'
 
 const Landing = () => {
   const [page, setPage] = useState(1)

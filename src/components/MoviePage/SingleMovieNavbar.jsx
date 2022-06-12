@@ -1,4 +1,4 @@
-import styles from '../styles/SingleMovie.module.css'
+import styles from '../../styles/SingleMovie.module.css'
 import { useNavigate } from 'react-router-dom'
 
 const SingleMovieNavbar = ({ movie }) => {

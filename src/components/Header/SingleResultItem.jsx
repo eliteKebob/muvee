@@ -1,9 +1,9 @@
-import styles from '../styles/Header.module.css'
+import styles from '../../styles/Header.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { filterGenres } from '../utils/filterGenres'
-import { setPrevPos } from '../features/movie/movieSlice'
+import { filterGenres } from '../../utils/filterGenres'
+import { setPrevPos } from '../../features/movie/movieSlice'
 
 const SingleResultItem = ({ movie, setShowResults, setQuery }) => {
   const [movieGenres, setMovieGenres] = useState([])

@@ -1,10 +1,10 @@
-import styles from '../styles/Landing.module.css'
+import styles from '../../styles/Landing.module.css'
 import { useSelector } from 'react-redux'
-import SingleMovieCard from './SingleMovieCard'
-import Loading from '../assets/loading.gif'
+import SingleMovieCard from '../Movie/SingleMovieCard'
+import Loading from '../../assets/loading.gif'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { setPrevPos } from '../features/movie/movieSlice'
+import { setPrevPos } from '../../features/movie/movieSlice'
 
 const Movies = ({ currentTab, page, setPage, sortBy }) => {
   const [currMovies, setCurrMovies] = useState([])

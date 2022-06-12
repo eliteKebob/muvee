@@ -1,6 +1,6 @@
-import styles from '../styles/HomepageNavbar.module.css'
+import styles from '../../styles/HomepageNavbar.module.css'
 import { useDispatch } from 'react-redux'
-import { setPrevPos } from '../features/movie/movieSlice'
+import { setPrevPos } from '../../features/movie/movieSlice'
 
 const HomepageNavbar = ({ currentTab, setCurrentTab, sortBy, setSortBy }) => {
   const dispatch = useDispatch()

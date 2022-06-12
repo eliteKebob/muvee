@@ -1,5 +1,5 @@
-import styles from '../styles/SingleMovieCard.module.css'
-import { filterGenres } from '../utils/filterGenres'
+import styles from '../../styles/SingleMovieCard.module.css'
+import { filterGenres } from '../../utils/filterGenres'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -7,7 +7,7 @@ import {
   addToWatchList,
   removeFromWatchList,
   setPrevPos,
-} from '../features/movie/movieSlice'
+} from '../../features/movie/movieSlice'
 
 const SingleMovieCard = ({ movie }) => {
   const [movieGenres, setMovieGenres] = useState([])

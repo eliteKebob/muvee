@@ -1,6 +1,6 @@
-import styles from '../styles/Landing.module.css'
+import styles from '../../styles/Landing.module.css'
 import { useSelector } from 'react-redux'
-import SingleMovieCard from './SingleMovieCard'
+import SingleMovieCard from '../Movie/SingleMovieCard'
 import { useEffect } from 'react'
 
 const WatchList = ({ currentTab }) => {

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Header from './components/Header'
+import Header from './components/Header/Header'
 import Landing from './pages/Landing'
 import SingleMovie from './pages/SingleMovie'
 import { useSelector } from 'react-redux'

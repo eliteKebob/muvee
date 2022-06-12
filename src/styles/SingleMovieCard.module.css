@@ -83,6 +83,11 @@
 .itemGenres p {
   font-size: 1.75vh !important;
   color: lightslategrey;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
 }
 
 .itemGenres p:not(:first-child) {

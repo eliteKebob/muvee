@@ -17,7 +17,15 @@ const Header = () => {
     if (movieGenres === null) {
       dispatch(fetchGenres())
     }
-    dispatch(searchMovies(query))
+    if (query.length > 2) {
+      dispatch(searchMovies(query))
+    }
+  }
+
+  const handleFocus = () => {
+    if (query.length > 2) {
+      setShowResults(true)
+    }
   }
 
   useEffect(() => {
@@ -44,14 +52,20 @@ const Header = () => {
           <input
             type='text'
             placeholder='Movie title'
+            id='queryInput'
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onFocus={handleFocus}
           />
           <button onClick={handleSearch}>Search</button>
         </div>
       </div>
       {showResults ? (
-        <SearchResults setShowResults={setShowResults} setQuery={setQuery} />
+        <SearchResults
+          setShowResults={setShowResults}
+          setQuery={setQuery}
+          query={query}
+        />
       ) : (
         ''
       )}

@@ -1,16 +1,20 @@
 import styles from '../styles/Header.module.css'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { filterGenres } from '../utils/filterGenres'
+import { setPrevPos } from '../features/movie/movieSlice'
 
 const SingleResultItem = ({ movie, setShowResults, setQuery }) => {
   const [movieGenres, setMovieGenres] = useState([])
 
   const genres = useSelector((state) => state.movie.genres.genres)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleNavigate = () => {
+    let pos = window.pageYOffset
+    dispatch(setPrevPos(pos))
     setQuery('')
     setShowResults(false)
     navigate(`/movie/${movie?.id}`)

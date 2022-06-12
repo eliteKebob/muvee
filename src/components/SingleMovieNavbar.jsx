@@ -8,7 +8,7 @@ const SingleMovieNavbar = ({ movie }) => {
       <p className={styles.nbSymbol}>&#60;</p>
       <p onClick={() => navigate('/')}> Back to List</p>
       <div className={styles.nbLinks}>
-        <p onClick={() => navigate('/')}>Home </p>
+        <p>Home </p>
         <p className={styles.nbSymbol}>&#62; </p>
         <p>{movie?.release_date?.split('-')[0]} </p>
         <p className={styles.nbSymbol}>&#62; </p>

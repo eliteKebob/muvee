@@ -26,6 +26,16 @@ const Movies = ({ currentTab, page, setPage, sortBy }) => {
     }
   }
 
+  const sortMovies = () => {
+    if (sortBy === 'descending') {
+      let newArr = [...currMovies]
+      newArr.sort((a, b) => b.popularity - a.popularity)
+      setCurrMovies([...newArr])
+    } else {
+      setCurrMovies([...movies])
+    }
+  }
+
   useEffect(() => {
     if (sortBy === 'smart') {
       setCurrMovies([...movies])
@@ -40,13 +50,7 @@ const Movies = ({ currentTab, page, setPage, sortBy }) => {
   }, [movies])
 
   useEffect(() => {
-    if (sortBy === 'descending') {
-      let newArr = [...currMovies]
-      newArr.sort((a, b) => b.popularity - a.popularity)
-      setCurrMovies([...newArr])
-    } else {
-      setCurrMovies(movies)
-    }
+    sortMovies()
     // eslint-disable-next-line
   }, [sortBy])
 

@@ -1,13 +1,18 @@
 import styles from '../styles/SingleMovie.module.css'
 import { useParams } from 'react-router-dom'
-import { fetchSingleMovie } from '../features/movie/movieSlice'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import SingleMovieListItem from '../components/SingleMovieListItem'
 import SingleMovieNavbar from '../components/SingleMovieNavbar'
+import {
+  fetchSingleMovie,
+  addToWatchList,
+  removeFromWatchList,
+} from '../features/movie/movieSlice'
 
 const SingleMovie = () => {
   const movie = useSelector((state) => state.movie.singleMovie)
+  const list = useSelector((state) => state.movie.watchList)
 
   const params = useParams()
   const dispatch = useDispatch()
@@ -16,6 +21,16 @@ const SingleMovie = () => {
     dispatch(fetchSingleMovie(params.id))
     // eslint-disable-next-line
   }, [params.id])
+
+  const handleClick = () => {
+    if (list?.includes(movie)) {
+      dispatch(removeFromWatchList(movie))
+      alert(`${movie?.original_title} has been removed from your watch list!`)
+    } else {
+      dispatch(addToWatchList(movie))
+      alert(`${movie?.original_title} has been added to your watch list!`)
+    }
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -57,6 +72,17 @@ const SingleMovie = () => {
               </div>
             </div>
             <SingleMovieListItem title='Overview' text={movie?.overview} />
+            <div className={styles.control}>
+              {list?.includes(movie) ? (
+                <p onClick={handleClick} className={styles.removeIcon}>
+                  [-] Remove from watch list
+                </p>
+              ) : (
+                <p onClick={handleClick} className={styles.addIcon}>
+                  [+] Add to watch list
+                </p>
+              )}
+            </div>
           </div>
         </div>
       </div>

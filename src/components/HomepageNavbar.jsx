@@ -25,10 +25,12 @@ const HomepageNavbar = ({ currentTab, setCurrentTab, sortBy, setSortBy }) => {
       >
         +Watch List
       </p>
-      <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-        <option value='smart'>Smart Order</option>
-        <option value='descending'>Popularity Descending</option>
-      </select>
+      {currentTab === 0 && (
+        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <option value='smart'>Smart Order</option>
+          <option value='descending'>Popularity Descending</option>
+        </select>
+      )}
     </div>
   )
 }

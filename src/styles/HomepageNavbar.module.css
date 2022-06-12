@@ -50,3 +50,13 @@
   background-color: #037ef3;
   color: white !important;
 }
+
+@media screen and (max-width: 500px) {
+  .wrapper p:first-child {
+    margin-left: 1vw;
+  }
+  .wrapper select {
+    margin-right: 1vw;
+    padding: 0;
+  }
+}

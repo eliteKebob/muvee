@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: flex-start;
   margin: 1vh 0.5vw;
-  height: 65vh;
+  height: max-content;
 }
 
 .head {
@@ -111,4 +111,35 @@
 
 .removeIcon {
   color: orangered !important;
+}
+
+@media screen and (max-width: 500px) {
+  .wrapper {
+    height: max-content;
+    width: 30vw;
+    margin: 1vh 2vw;
+  }
+  .head img {
+    width: 30vw;
+  }
+  .body {
+    width: 30vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .bodyText,
+  .btTitle {
+    width: max-content;
+    margin-left: none;
+    margin: 0 auto;
+  }
+  .itemGenres {
+    display: none;
+  }
+  .control {
+    font-size: 5vh;
+    width: max-content;
+    align-self: center;
+  }
 }

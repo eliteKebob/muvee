@@ -6,7 +6,7 @@
 }
 
 .disabledWrapper {
-  transform: translateX(-101vw) translateY(-101vh);
+  transform: translateX(-101vw);
 }
 
 .listWrapper {
@@ -38,4 +38,14 @@
 .loadingSection img {
   margin-right: 1vw;
   height: 5vh;
+}
+
+@media screen and (max-width: 500px) {
+  .listWrapper {
+    grid-template-columns: repeat(3, 1fr);
+    width: 96vw;
+  }
+  .listWrapper .loadingSection {
+    grid-column: 2;
+  }
 }

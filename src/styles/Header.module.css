@@ -124,3 +124,32 @@ input {
   font-size: 2vh;
   font-weight: 700;
 }
+
+@media screen and (max-width: 500px) {
+  .wrapper {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .wrapper h1 {
+    margin: 0;
+    font-size: 4vh;
+  }
+  .searchBar input {
+    width: 60vw;
+  }
+  .srWrapper {
+    top: 14vh;
+    width: 95vw;
+    left: 2.5vw;
+  }
+  .srContent {
+    width: 95vw;
+  }
+  .itemWrapper {
+    min-width: 95vw;
+  }
+  .itemWrapper img {
+    width: 10vw;
+    max-height: 18vw;
+  }
+}

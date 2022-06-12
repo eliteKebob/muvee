@@ -149,3 +149,39 @@
   color: #037ef3;
   border: 1px solid #037ef3;
 }
+
+@media screen and (max-width: 500px) {
+  .movieContent {
+    flex-direction: column;
+    align-items: center;
+  }
+  .image,
+  .info {
+    width: 80vw;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .info {
+    margin-top: 2vh;
+  }
+  .image img {
+    width: 50vw;
+  }
+  .control {
+    margin-bottom: 2vh;
+  }
+  .navbar {
+    justify-content: center;
+    font-size: 3vh;
+    text-decoration: underline;
+  }
+  .nbSymbol {
+    display: none;
+  }
+  .nbLinks {
+    display: none;
+  }
+}

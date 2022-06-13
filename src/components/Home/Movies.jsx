@@ -68,8 +68,8 @@ const Movies = ({ currentTab, setPage, sortBy }) => {
   useEffect(() => {
     const option = {
       root: null,
-      rootMargin: '20px',
-      threshold: 1.0,
+      rootMargin: '1px',
+      threshold: 0,
     }
     const observer = new IntersectionObserver(handleObserver, option)
     if (loader.current) observer.observe(loader.current)

@@ -1,10 +1,10 @@
 import styles from '../../styles/Landing.module.css'
-import { useSelector } from 'react-redux'
 import SingleMovieCard from '../Movie/SingleMovieCard'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const WatchList = ({ currentTab }) => {
-  const movies = useSelector((state) => state.movie.watchList)
+  const [movies, setMovies] = useState([])
+  const localMovies = JSON.parse(localStorage.getItem('localWatchList'))
 
   useEffect(() => {
     if (currentTab === 1) {
@@ -15,6 +15,10 @@ const WatchList = ({ currentTab }) => {
       })
     }
   }, [currentTab])
+
+  useEffect(() => {
+    setMovies([...localMovies])
+  }, [localMovies])
 
   return (
     <div

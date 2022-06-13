@@ -60,9 +60,26 @@ export const movieSlice = createSlice({
   reducers: {
     addToWatchList: (state, action) => {
       state.watchList.push(action.payload)
+      const localWatchList = JSON.parse(localStorage.getItem('localWatchList'))
+      if (localWatchList) {
+        let newArr = [...localWatchList, action.payload]
+        localStorage.setItem('localWatchList', JSON.stringify(newArr))
+      } else {
+        let newArr = [...state.watchList]
+        localStorage.setItem('localWatchList', JSON.stringify(newArr))
+      }
     },
     removeFromWatchList: (state, action) => {
-      state.watchList.splice(action.payload, 1)
+      // state.watchList.splice(action.payload, 1)
+      let newArr = [...state.watchList]
+      let newArr2 = newArr.filter((m) => m.id !== action.payload.id)
+      state.watchList = [...newArr2]
+      const localWatchList = JSON.parse(localStorage.getItem('localWatchList'))
+      if (localWatchList) {
+        let newArr = [...localWatchList]
+        let newArr2 = newArr.filter((m) => m.id !== action.payload.id)
+        localStorage.setItem('localWatchList', JSON.stringify(newArr2))
+      }
     },
     setPrevPos: (state, action) => {
       state.prevPosition = action.payload

@@ -11,25 +11,24 @@ import {
 
 const SingleMovieCard = ({ movie }) => {
   const [movieGenres, setMovieGenres] = useState([])
+  const [isSavedMovie, setIsSavedMovie] = useState(false)
 
   const genres = useSelector((state) => state.movie.genres?.genres)
-  const list = useSelector((state) => state.movie.watchList)
+  const list = JSON.parse(localStorage.getItem('localWatchList'))
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    filterGenres(movie, setMovieGenres, genres)
-    // eslint-disable-next-line
-  }, [movie])
-
   const handleClick = () => {
-    if (list?.includes(movie)) {
-      dispatch(removeFromWatchList(movie))
-      alert(`${movie?.original_title} has been removed from your watch list!`)
-    } else {
+    checkIfSaved()
+    if (!isSavedMovie) {
       dispatch(addToWatchList(movie))
       alert(`${movie?.original_title} has been added to your watch list!`)
+      setIsSavedMovie(true)
+    } else {
+      dispatch(removeFromWatchList(movie))
+      alert(`${movie?.original_title} has been removed from your watch list!`)
+      setIsSavedMovie(false)
     }
   }
 
@@ -38,6 +37,26 @@ const SingleMovieCard = ({ movie }) => {
     dispatch(setPrevPos(pos))
     navigate(`/movie/${movie?.id}`)
   }
+
+  const checkIfSaved = () => {
+    if (list) {
+      let newArr = list.filter((m) => m.id === movie.id)
+
+      if (newArr.length > 0) {
+        setIsSavedMovie(true)
+      } else {
+        setIsSavedMovie(false)
+      }
+    } else {
+      setIsSavedMovie(false)
+    }
+  }
+
+  useEffect(() => {
+    filterGenres(movie, setMovieGenres, genres)
+    setTimeout(checkIfSaved, 100)
+    // eslint-disable-next-line
+  }, [movie])
 
   return (
     <div className={styles.wrapper}>
@@ -59,18 +78,23 @@ const SingleMovieCard = ({ movie }) => {
               {movie?.original_title}
             </p>
             <div className={styles.itemGenres}>
-              {movieGenres.length > 0
+              {movieGenres?.length > 0
                 ? movieGenres.map((g, idx) => (
                     <p key={idx}>
                       {g}
                       {movieGenres?.length - 1 > idx ? ',' : ''}
                     </p>
                   ))
-                : ''}
+                : movie?.genres?.map((g, idx) => (
+                    <p key={idx}>
+                      {g.name}
+                      {movie?.genres?.length - 1 > idx ? ',' : ''}
+                    </p>
+                  ))}
             </div>
           </div>
           <div className={styles.control}>
-            {list?.includes(movie) ? (
+            {isSavedMovie ? (
               <p onClick={handleClick} className={styles.removeIcon}>
                 [-]
               </p>

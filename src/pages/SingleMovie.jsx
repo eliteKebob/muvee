@@ -1,6 +1,6 @@
 import styles from '../styles/SingleMovie.module.css'
 import { useParams } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import SingleMovieListItem from '../components/Movie/SingleMovieListItem'
 import SingleMovieNavbar from '../components/MoviePage/SingleMovieNavbar'
@@ -11,26 +11,50 @@ import {
 } from '../features/movie/movieSlice'
 
 const SingleMovie = () => {
+  const [isSavedMovie, setIsSavedMovie] = useState(false)
+
   const movie = useSelector((state) => state.movie.singleMovie)
-  const list = useSelector((state) => state.movie.watchList)
+  const list = JSON.parse(localStorage.getItem('localWatchList'))
 
   const params = useParams()
   const dispatch = useDispatch()
+
+  const handleClick = () => {
+    checkIfSaved()
+    if (!isSavedMovie) {
+      dispatch(addToWatchList(movie))
+      alert(`${movie?.original_title} has been added to your watch list!`)
+      setIsSavedMovie(true)
+    } else {
+      dispatch(removeFromWatchList(movie))
+      alert(`${movie?.original_title} has been removed from your watch list!`)
+      setIsSavedMovie(false)
+    }
+  }
+
+  const checkIfSaved = () => {
+    if (list) {
+      let newArr = list.filter((m) => m.id === movie.id)
+
+      if (newArr.length > 0) {
+        setIsSavedMovie(true)
+      } else {
+        setIsSavedMovie(false)
+      }
+    } else {
+      setIsSavedMovie(false)
+    }
+  }
 
   useEffect(() => {
     dispatch(fetchSingleMovie(params.id))
     // eslint-disable-next-line
   }, [params.id])
 
-  const handleClick = () => {
-    if (list?.includes(movie)) {
-      dispatch(removeFromWatchList(movie))
-      alert(`${movie?.original_title} has been removed from your watch list!`)
-    } else {
-      dispatch(addToWatchList(movie))
-      alert(`${movie?.original_title} has been added to your watch list!`)
-    }
-  }
+  useEffect(() => {
+    setTimeout(checkIfSaved, 100)
+    // eslint-disable-next-line
+  }, [movie])
 
   return (
     <div className={styles.wrapper}>
@@ -73,7 +97,7 @@ const SingleMovie = () => {
             </div>
             <SingleMovieListItem title='Overview' text={movie?.overview} />
             <div className={styles.control}>
-              {list?.includes(movie) ? (
+              {isSavedMovie ? (
                 <p onClick={handleClick} className={styles.removeIcon}>
                   [-] Remove from watch list
                 </p>

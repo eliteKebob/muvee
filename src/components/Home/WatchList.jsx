@@ -37,6 +37,7 @@ const WatchList = ({ currentTab }) => {
               movie={movie}
               movies={movies}
               setMovies={setMovies}
+              currentTab={currentTab}
             />
           ))
         : 'You have not added anything to your watch list.'}

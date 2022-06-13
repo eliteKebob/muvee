@@ -83,7 +83,7 @@ const Movies = ({ currentTab, setPage, sortBy }) => {
         }
       >
         {currMovies?.map((movie, idx) => (
-          <SingleMovieCard key={idx} movie={movie} />
+          <SingleMovieCard key={idx} movie={movie} currentTab={currentTab} />
         ))}
         <div className={styles.loadingSection}>
           <img src={Loading} alt='' />

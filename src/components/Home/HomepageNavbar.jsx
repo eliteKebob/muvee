@@ -28,7 +28,7 @@ const HomepageNavbar = ({ currentTab, setCurrentTab, sortBy, setSortBy }) => {
       {currentTab === 0 && (
         <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
           <option value='smart'>Smart Order</option>
-          <option value='descending'>Popularity Descending</option>
+          <option value='descending'>Popularity</option>
         </select>
       )}
     </div>

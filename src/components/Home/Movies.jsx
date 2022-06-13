@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setPrevPos } from '../../features/movie/movieSlice'
 
-const Movies = ({ currentTab, page, setPage, sortBy }) => {
+const Movies = ({ currentTab, setPage, sortBy }) => {
   const [currMovies, setCurrMovies] = useState([])
 
   const loader = useRef(null)

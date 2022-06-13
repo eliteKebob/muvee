@@ -9,7 +9,7 @@ import {
   setPrevPos,
 } from '../../features/movie/movieSlice'
 
-const SingleMovieCard = ({ movie }) => {
+const SingleMovieCard = ({ movie, movies, setMovies }) => {
   const [movieGenres, setMovieGenres] = useState([])
   const [isSavedMovie, setIsSavedMovie] = useState(false)
 
@@ -26,6 +26,9 @@ const SingleMovieCard = ({ movie }) => {
       alert(`${movie?.original_title} has been added to your watch list!`)
       setIsSavedMovie(true)
     } else {
+      let newArr = [...movies]
+      let newArr2 = newArr.filter((m) => m.id !== movie.id)
+      setMovies(newArr2)
       dispatch(removeFromWatchList(movie))
       alert(`${movie?.original_title} has been removed from your watch list!`)
       setIsSavedMovie(false)

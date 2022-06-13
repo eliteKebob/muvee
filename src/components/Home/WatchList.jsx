@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 
 const WatchList = ({ currentTab }) => {
   const [movies, setMovies] = useState([])
+
   const localMovies = JSON.parse(localStorage.getItem('localWatchList'))
 
   useEffect(() => {
@@ -17,8 +18,13 @@ const WatchList = ({ currentTab }) => {
   }, [currentTab])
 
   useEffect(() => {
-    setMovies([...localMovies])
-  }, [localMovies])
+    if (localMovies) {
+      setMovies([...localMovies])
+    } else {
+      setMovies([])
+    }
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <div
@@ -26,7 +32,12 @@ const WatchList = ({ currentTab }) => {
     >
       {movies?.length > 0
         ? movies?.map((movie, idx) => (
-            <SingleMovieCard key={idx} movie={movie} />
+            <SingleMovieCard
+              key={idx}
+              movie={movie}
+              movies={movies}
+              setMovies={setMovies}
+            />
           ))
         : 'You have not added anything to your watch list.'}
     </div>
